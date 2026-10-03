@@ -67,7 +67,7 @@ LLMLens 是一款 Typecho 插件，将站点的文章、页面与分类整理为
 - [技术](https://example.com/category/tech): 分类描述
 ```
 
-[示例链接 热衷于的博客](https://zooyoo.top/llms.txt)
+- 示例链接：[llms.txt | 热衷于的博客](https://zooyoo.top/llms.txt)
 
 ## 开源许可
 
