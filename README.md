@@ -1,4 +1,4 @@
-![LLMLens Banner](https://zooyoo.top/img/llmlens.png)
+<img alt="llmlens banner" src="https://github.com/user-attachments/assets/8dd6fc57-a47b-4b9c-b9d4-a4b177d66c03"/>
 
 # LLMLens 大语言模型的 Typecho 站点透镜
 
