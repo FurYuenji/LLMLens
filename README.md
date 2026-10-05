@@ -7,6 +7,11 @@ LLMLens 是一款 Typecho 插件，将站点的文章、页面与分类整理为
 本项目衍生自 Bingyin 的 [LLMsTXT](https://github.com/9bingyin/typecho-llmstxt) 插件，
 由 [栀渊Yuenji](https://github.com/FurYuenji/) 修改维护。
 
+### 快速下载
+
+[永硕 E 盘 | YS-E](https://keen.cccpan.com/) 密码:Yuenji 路径:/root/LLMLens.zip
+[蓝奏云 | WOOZOOO](https://yuenji.lanzoul.com/iP1K64au46fa) 密码:Yuenji
+
 ## 适用版本
 
 本插件在 Typecho 1.3.0 + PHP 7.4 环境下测试通过，其它版本请自行测试。
