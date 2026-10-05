@@ -1,3 +1,5 @@
+![LLMLens Banner](https://zooyoo.top/img/llmlens.png)
+
 # LLMLens 大语言模型的 Typecho 站点透镜
 
 ## 插件简介
