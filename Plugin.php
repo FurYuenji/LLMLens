@@ -4,7 +4,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  * 为大语言模型配备 /llms.txt，详见 llmstxt.org
  * @package LLMLens
  * @author 热衷于
- * @version 1.0.0
+ * @version 1.0.1
  * @link https://zooyoo.top/
  * @license MIT
  * @copyright Copyright (c) 2025 Bingyin, 2026 栀渊Yuenji
