@@ -155,6 +155,7 @@ class LLMLens_Widget extends Typecho_Widget
     {
         if ($max <= 0) $max = 120;
         $text = $this->applyCustomFilters($text, $customFilters);
+
         $text = preg_replace('/<!--more-->.*$/s', '', $text);
         $text = preg_replace('/```[\s\S]*?(?:```|$)/u', '', $text);
         $text = preg_replace('/~~~[\s\S]*?(?:~~~|$)/u', '', $text);
@@ -178,12 +179,41 @@ class LLMLens_Widget extends Typecho_Widget
         $text = preg_replace('/^\s{0,3}([-*_]\s*){3,}$/mu', '', $text);
         $text = preg_replace('/^\s*>\s*/mu', '', $text);
         $text = preg_replace('/^\s*\|.*\|\s*$/mu', '', $text);
+
+        $text = preg_replace('#\b(?:https?|ftp)://\S+#iu', '原文链接', $text);
+        $text = preg_replace('#\bwww\.[\w.-]+#iu', '原文域名', $text);
+        $text = preg_replace('/\b[\w.+-]+@[\w.-]+\.\w+\b/u', '', $text);
+        $text = preg_replace('/(?<![a-zA-Z0-9-])(?:[\w-]+\.)+(?:com|cn|net|org|top|io|wp|dev|me|xyz|info|biz|cc|tv|co|edu|gov)(?![a-zA-Z0-9-])/iu', '原文域名', $text);
+        $text = preg_replace('/\b[a-z0-9]{8}-?[a-z0-9]{4}-?[a-z0-9]{4}-?[a-z0-9]{4}-?[a-z0-9]{12}\b/i', '', $text);
+
         $text = trim(preg_replace('/\s+/u', ' ', $text));
         $text = preg_replace('/"([^"]*)"/u', '“$1”', $text);
+
         if ($text === '') return '暂无摘要';
         if (mb_strlen($text, 'UTF-8') <= $max) return $text;
-        $cut = mb_substr($text, 0, $max, 'UTF-8');
-        if (preg_match('/^(.*[。！？；.!?;])/us', $cut, $m)) $cut = $m[1];
-        return rtrim($cut, '，,、') . '...';
+
+        $cut = $this->safeTruncate($text, $max);
+        if ($cut === '') return '暂无摘要';
+
+        if (preg_match('/^(.*[。！？；.!?;])/us', $cut, $m)) {
+            $cut = $m[1];
+        }
+        $cut = rtrim($cut, '，,、');
+        return $cut === '' ? '暂无摘要' : $cut . '...';
+    }
+
+    private function safeTruncate($text, $max)
+    {
+        if (mb_strlen($text, 'UTF-8') <= $max) return $text;
+        preg_match_all('/[a-zA-Z]+|-?\d+(\.\d+)?|[\x{4e00}-\x{9fa5}]|[^\x{4e00}-\x{9fa5}a-zA-Z0-9]/u', $text, $m);
+        $result = '';
+        $len = 0;
+        foreach ($m[0] as $token) {
+            $tokenLen = mb_strlen($token, 'UTF-8');
+            if ($len + $tokenLen > $max) break;
+            $result .= $token;
+            $len += $tokenLen;
+        }
+        return rtrim($result);
     }
 }
